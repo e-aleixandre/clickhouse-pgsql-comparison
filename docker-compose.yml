@@ -12,12 +12,8 @@ services:
       nofile:
         soft: 262144
         hard: 262144
-    networks:
-      - default
-
-  clickhouse-client:
-    image: yandex/clickhouse-client
-    command: ['--host', 'clickhouse-server']
+    volumes:
+      - "./data:/data"
     networks:
       - default
 
