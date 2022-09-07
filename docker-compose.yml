@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  clickhouse-server:
+    image: clickhouse/clickhouse-server
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+      - "9009:9009"
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 262144
+        hard: 262144
+    networks:
+      - default
+
+  clickhouse-client:
+    image: yandex/clickhouse-client
+    command: ['--host', 'clickhouse-server']
+    networks:
+      - default
+
+  pgsql:
+    image: postgres:14.5
+    restart: always
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+    ports:
+      - "5432:5432"
+    networks:
+      - default
+
+networks:
+  default:
+    external: true
+    name: dbpoc-network
