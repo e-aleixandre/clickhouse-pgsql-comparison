@@ -1,0 +1,27 @@
+body {
+  background-color: #292929;
+}
+
+#root {
+  color: white;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+table tr.result td.result-value b {
+  color: goldenrod;
+}
+
+.App input {
+  background-color: #292929;
+  color: white;
+  border: 1px solid darkgray;
+  padding: 4px;
+  outline: none;
+}
+
+.mt-4 {
+  margin-top: 0.6rem;
+}
