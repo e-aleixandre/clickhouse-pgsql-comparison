@@ -1,4 +1,9 @@
-export const Search = (props) => {
+type SearchProps = {
+    setQuery: (arg0: string) => void,
+    query: string
+}
+
+export const Search = (props: SearchProps) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         props.setQuery(e.target.value);
     }

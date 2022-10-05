@@ -1,6 +1,14 @@
 import {Result} from "../../types/types";
+import {useState} from "react";
 
-export const ResultsTable = ({results, updateFunction}: {results: Result[], updateFunction}) => {
+type ResultsTableProps = {
+    results: Result[],
+    updateFunction: (arg0: string, arg1:string) => void
+}
+
+export const ResultsTable = () => {
+    const [results, setResults] = useState<Result[]>([]);
+
     if (results.length === 0) {
         return (
             <h4>No results... Change your query</h4>
@@ -12,7 +20,7 @@ export const ResultsTable = ({results, updateFunction}: {results: Result[], upda
         border: '1px solid white'
     }
 
-    const resultRow: (Result) => JSX.Element = (result) => {
+    const resultRow: (arg0: Result) => JSX.Element = (result) => {
         const valueHtml = {
             __html: result.highlight ? result.highlight.value[0] :
                 result._source.value

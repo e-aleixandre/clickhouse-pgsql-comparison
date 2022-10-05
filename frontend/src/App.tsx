@@ -13,16 +13,16 @@ function App() {
   const [query, setQuery] = useState<string>("");
   const [type, setType] = useState<string>("all");
 
-  const getContents: () => void = async () => {
+  const useGetContents: () => void = async () => {
       const backendResponse = await useGetAllContents();
 
       setResults(backendResponse.results);
       setTime(backendResponse.time);
   }
 
-  const searchContents: () => void = async () => {
+  const useSearchContents: () => void = async () => {
       if ('' === query) {
-          getContents();
+          useGetContents();
           return;
       }
 
@@ -32,7 +32,7 @@ function App() {
       setTime(backendResponse.time);
   }
 
-  const updateContent: (number, string) => void = async (id, value) => {
+  const updateContent: (arg0: string, arg1: string) => void = async (id, value) => {
       const backendResponse = await useUpdateContent(id, value);
 
       const newResults = results.map(result => {
@@ -48,16 +48,16 @@ function App() {
   }
 
   useEffect(() => {
-      getContents();
+      useGetContents();
   }, []);
 
   useEffect(() => {
-      searchContents()
-  }, [query, type])
+      useSearchContents()
+  }, [useSearchContents, query, type])
 
   return (
     <div className="App">
-      <Search query={query} setQuery={setQuery} searchFunction={searchContents} />
+      <Search query={query} setQuery={setQuery}/>
         <Filter setType={setType}/>
         <small className="mt-4" style={{display: "block"}}>Last query took {time * 1000} ms</small>
       <ResultsTable results={results} updateFunction={updateContent}/>

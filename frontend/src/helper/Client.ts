@@ -15,7 +15,7 @@ export const useMatchContents: (query: string, type: string) => Promise<BackendR
     return jsonData as BackendResponse;
 }
 
-export const useUpdateContent: (id: number, value: string) => Promise<BackendResponse> = async (id, value) => {
+export const useUpdateContent: (id: string, value: string) => Promise<BackendResponse> = async (id, value) => {
     const response = await fetch(`http://127.0.0.1:8080/Client.php?method=update&id=${id}&value=${value}`);
     const jsonData = await response.json();
 
